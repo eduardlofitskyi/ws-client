@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userWebService" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="com.lofitskyi.remote.UserResource"/>
+        <property name="wsdlDocumentUrl" value="http://localhost:8888/ws/?wsdl"/>
+        <property name="namespaceUri" value="http://ws.controller.lofitskyi.com/"/>
+        <property name="serviceName" value="UserResourceImplService"/>
+        <property name="portName" value="UserResourceImplPort"/>
+    </bean>
+
+    <bean id="user" class="com.lofitskyi.client.UserClient">
+        <constructor-arg name="resource" ref="userWebService"/>
+    </bean>
+</beans>
